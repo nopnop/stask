@@ -1,8 +1,7 @@
 ```yaml
-id: stask000001
+id: stask000003
 due: 2016-05-30 04:30:02
 status: PENDING
-done: false
 tags:
   - bug
   - backup
@@ -12,12 +11,11 @@ cost: 1
 require: [ ./stask000002_simpler.md ]
 ```
 
-### feat: test stask features sdfsdf
-
+### feat: Another task
 
 Description of stask
 
-qsdqsd sd
+qsdqsd
 
 qsdqsd
 qs

@@ -4,10 +4,17 @@ const minimist = require('minimist')
 const pkg = require('../package.json')
 const util = require('util')
 const path = require('path')
+const Stream = require('stream')
+const through2 = require('through2')
+const stringify = require('json-stable-stringify')
+const ndjson = require('ndjson')
 
 // List of available actions
 const actions = {
-  parse: require('../lib/parse')
+  parse: require('../lib/parse'),
+  read: require('../lib/read'),
+  format: require('../lib/format'),
+  watch: require('../lib/watch')
 }
 
 // Read command line options
@@ -69,13 +76,51 @@ function handleAction (options) {
     console.error('Error: Unknown action (%s)', action)
     printHelp()
     process.exit(1)
-  } else {
-    return actions[action](options)
-    .then((result) => {
-      if (result) {
+  }
+
+  let result
+  switch (action) {
+    case 'format':
+      process.stdin
+        .pipe(ndjson.parse())
+        .pipe(actions.format(options))
+        .pipe(process.stdout)
+      break
+    // case 'watch':
+    //   actions.watch(options)
+    //   break
+    default:
+      result = actions[action](options.files[0], options)
+      break
+  }
+
+  function handleStream (stream) {
+    stream.on('error', handleError)
+    stream.pipe(through2.obj((chunk, encoding, next) => {
+      if (typeof chunk === 'object') {
+        next(null, stringify(chunk) + '\n')
+      } else {
+        next(null, chunk)
+      }
+    })).pipe(process.stdout)
+  }
+
+  function handlePromise (promise) {
+    return result.then((result) => {
+      if (result instanceof Stream) {
+        return handleStream(result)
+      } else {
         console.log(util.inspect(result, { colors: true }))
       }
     })
+  }
+
+  if (!result) {
+    return
+  } else if (result instanceof Stream) {
+    return handleStream(result)
+  } else if (result.then) {
+    return handlePromise(result)
   }
 }
 
@@ -101,7 +146,7 @@ if (argv.version) {
 }
 
 // Actions
-handleAction(options)
+Promise.resolve(handleAction(options))
   .catch((error) => {
     handleError(error)
   })

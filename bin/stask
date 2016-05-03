@@ -1,0 +1,107 @@
+#! /usr/bin/env node
+'use strict'
+const minimist = require('minimist')
+const pkg = require('../package.json')
+const util = require('util')
+const path = require('path')
+
+// List of available actions
+const actions = {
+  parse: require('../lib/parse')
+}
+
+// Read command line options
+const argv = minimist(process.argv.slice(2), {
+  boolean: true,
+  string: ['cwd'],
+  alias: {
+    h: 'help',
+    w: 'watch',
+    V: 'version'
+  },
+  default: {
+    watch: false,
+    cwd: process.cwd()
+  }
+})
+
+/**
+ * Print command usages
+ */
+function printHelp () {
+  let helpActions = Object.keys(actions).map((key) => {
+    let help = (actions[key].help || 'Undocumented').split('\n')[0].trim()
+    return `    - ${key}: ${help}`
+  })
+
+  console.log(`
+  Usage: stask [options] <action> [...]
+
+  Options:
+    -h, --help       Output command usages
+    -V, --version    Output the version
+
+  Actions:
+${helpActions.join('\n')}
+
+`)
+}
+
+/**
+ * Handle error and print out to user
+ * @param  {Error} error Error instance
+ */
+function handleError (error) {
+  console.error('Error:', error.stack)
+  process.exit(typeof error.code === 'number' ? error.code : 1)
+}
+
+/**
+ * Handler stask action
+ * @param  {string} action   Action to perform
+ * @param  {object} options  Action options
+ * @return {Promise}
+ */
+function handleAction (options) {
+  let action = options.action
+
+  if (!action || !actions[action]) {
+    console.error('Error: Unknown action (%s)', action)
+    printHelp()
+    process.exit(1)
+  } else {
+    return actions[action](options)
+    .then((result) => {
+      if (result) {
+        console.log(util.inspect(result, { colors: true }))
+      }
+    })
+  }
+}
+
+// ---------------
+
+// Extract action
+const options = Object.assign({}, argv, {
+  action: argv._[0],
+  files: argv._.slice(1),
+  cwd: path.resolve(argv.cwd)
+})
+
+// Help
+if (argv.help) {
+  printHelp()
+  process.exit(0)
+}
+
+// Version
+if (argv.version) {
+  console.log(pkg.version)
+  process.exit(0)
+}
+
+// Actions
+handleAction(options)
+  .catch((error) => {
+    handleError(error)
+  })

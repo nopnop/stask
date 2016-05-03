@@ -14,10 +14,10 @@
   "licenses": "MIT",
   "main": "lib/stask",
   "bin": {
-      "stask": "bin/stask.js"
+    "stask": "bin/stask"
   },
   "engines": {
-      "node": ">= 0.10"
+    "node": ">= 0.10"
   },
   "scripts": {
     "test": "mocha",
@@ -27,14 +27,28 @@
     "coverage": "rm -rf ./lib-cov && jscoverage ./lib ./lib-cov && COVERAGE=true mocha --reporter html-cov > ./coverage.html && rm -rf ./lib-cov",
     "jshint": "./node_modules/.bin/jshint --exclude node_modules"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "bluebird-co": "^2.1.2",
+    "chokidar": "^1.4.3",
+    "fs-extra-promise": "^0.3.1",
+    "globby": "^4.0.0",
+    "js-yaml": "^3.6.0",
+    "minimist": "^1.2.0"
+  },
   "devDependencies": {
     "expect.js": "*",
-    "mocha":  "*",
+    "mocha": "*",
     "jshint": "*"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
   },
-  "keywords": ["task","manager","markdown","plain","text"]
+  "keywords": [
+    "task",
+    "manager",
+    "markdown",
+    "plain",
+    "text"
+  ]
 }

@@ -2,6 +2,8 @@
 
 S(imple|art|illy) task manager in plain markdown files
 
+**ALPHA - ONGOING**
+
 ## Features
 
   -
@@ -9,14 +11,10 @@ S(imple|art|illy) task manager in plain markdown files
 ## Installation
 
 ```shell
-npm install --save stask
+npm install --global stask
 ```
 
 ## Usage
-
-```javascript
-var stask = require('stask');
-```
 
 ---
 

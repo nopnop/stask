@@ -16,7 +16,8 @@ const actions = {
   format: require('../lib/format'),
   watch: require('../lib/watch'),
   update: require('../lib/update'),
-  add: require('../lib/add')
+  add: require('../lib/add'),
+  list: require('../lib/list')
 }
 
 // Read command line options
@@ -90,8 +91,9 @@ function handleAction (options) {
         .pipe(actions.format(options))
         .pipe(process.stdout)
       break
+    case 'list':
     case 'add':
-      result = actions.add(options)
+      result = actions[action](options)
       break
     default:
       result = actions[action](options.files[0], options)

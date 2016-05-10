@@ -1,6 +1,3 @@
-- [ ] feat: Another task [...](./done/stask0004_test.md)
-- [ ] feat: Another task [...](./stask000003_test-stask.md)
-
-
-- [ ] feat: test stask features [...](./stask000002_simpler.md)
-- [ ] feat: test stask features sdfsdf
+- [ ] feat: test stask features sdfsdf      [...](./stask000001_test-stask.md)
+- [ ] feat: Impp      [...](./stask0002_feat-impp.md)
+- [ ] Another task     [...](./stask0003_another-task.md)

@@ -15,14 +15,16 @@ const actions = {
   read: require('../lib/read'),
   format: require('../lib/format'),
   watch: require('../lib/watch'),
+  update: require('../lib/update'),
   add: require('../lib/add')
 }
 
 // Read command line options
 const argv = minimist(process.argv.slice(2), {
   boolean: true,
-  string: ['cwd'],
+  string: ['cwd', 'filter', 'prefix'],
   alias: {
+    f: 'filter',
     h: 'help',
     w: 'watch',
     V: 'version'
@@ -48,7 +50,8 @@ function printHelp () {
   Options:
     -h, --help       Output command usages
     -V, --version    Output the version
-
+    -f, --filter     Read filter (mongo-like expression)
+    --prefix         For task id prefix (used by add)
   Actions:
 ${helpActions.join('\n')}
 

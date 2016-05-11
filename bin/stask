@@ -11,13 +11,12 @@ const ndjson = require('ndjson')
 
 // List of available actions
 const actions = {
-  parse: require('../lib/parse'),
-  read: require('../lib/read'),
-  format: require('../lib/format'),
-  watch: require('../lib/watch'),
-  update: require('../lib/update'),
-  add: require('../lib/add'),
-  list: require('../lib/list')
+  parse: require('../lib/actions/parse'),
+  read: require('../lib/actions/read'),
+  format: require('../lib/actions/format'),
+  update: require('../lib/actions/update'),
+  add: require('../lib/actions/add'),
+  list: require('../lib/actions/list')
 }
 
 // Read command line options
@@ -77,6 +76,10 @@ function handleError (error) {
 function handleAction (options) {
   let action = options.action
 
+  if (options.cwd !== process.cwd()) {
+    process.chdir(options.cwd)
+  }
+
   if (!action || !actions[action]) {
     console.error('Error: Unknown action (%s)', action)
     printHelp()
@@ -91,6 +94,7 @@ function handleAction (options) {
         .pipe(actions.format(options))
         .pipe(process.stdout)
       break
+    case 'read':
     case 'list':
     case 'add':
       result = actions[action](options)

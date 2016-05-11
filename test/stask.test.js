@@ -1,14 +1,24 @@
-/* jshint undef: false, unused: false */
+/* global describe it */
+'use strict'
+const expect = require('expect.js')
+const path = require('path')
+const co = require('bluebird-co').co
+const Task = require('../lib/Task.js')
 
-var stask = (process.env.COVERAGE ? require('../lib-cov/stask.js') : require('../lib/stask.js'));
-var expect = require('expect.js');
-var join   = require('path').join;
-
-
-function fixp(filename) {
-  return join(__dirname, '/fixtures', filename);
+function fixp (filename) {
+  return path.join(__dirname, '/fixtures', filename)
 }
 
-describe('stask', function(){
-  it('should be tested ...')
+describe('stask', function () {
+  describe('Task', function () {
+    describe('constructor', function () {
+      it('should create a default task', function () {
+        let raw = {
+          id: 'foo01'
+        }
+        let task = new Task(raw)
+        expect(task.id).to.be.eql('foo0001')
+      })
+    })
+  })
 })

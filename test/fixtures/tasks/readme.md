@@ -1,3 +1,5 @@
-- [ ] feat: test stask features sdfsdf [...](./stask000001_test-stask.md)
-- [x] feat: Impp [...](./stask0002_feat-impp.md)
+- [ ] feat: test stask features sdfsdf [...](./stask000001_feat-test-stask-features-sdfsdf.md)
+- [x] feat: Rename task foo [...](./stask0002_feat-rename-task.md)
 - [ ] Another task [...](./stask0003_another-task.md)
+- [ ] Not yet a task [...](./stask0007_not-yet-a-task.md)
+- [ ] Not yet a task foo [...](./stask0006_not-yet-a-task-foo.md)

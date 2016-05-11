@@ -63,7 +63,7 @@ ${helpActions.join('\n')}
  * @param  {Error} error Error instance
  */
 function handleError (error) {
-  console.error('Error:', error.stack)
+  console.error(error.stack)
   process.exit(typeof error.code === 'number' ? error.code : 1)
 }
 

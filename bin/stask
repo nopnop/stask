@@ -120,7 +120,10 @@ function handleAction (options) {
       if (result instanceof Stream) {
         return handleStream(result)
       } else {
-        console.log(util.inspect(result, { colors: true }))
+        if (result !== undefined) {
+          // console.log(util.inspect(result, { colors: true }))
+          console.log(result)
+        }
       }
     })
   }

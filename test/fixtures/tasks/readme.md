@@ -1,5 +1,7 @@
-- [ ] fooo [...](./t0001_fooo.md)
-- [x] feat: Rename [...](./t0002_feat-rename.md)
-- [ ] Another task [...](./t0003_another-task.md)
-- [ ] Not yet a task [...](./t0004_not-yet-a-task.md)
-- [ ] Not yet a task 2 [...](./t0005_not-yet-a-task-2.md)
+# Task list
+- [x] feat: Commit and go to sleep @owner(JP) [+](t0001_feat-commit-and-go-to-sleep.md)
+- [ ] feat: Rename [+](t0002_feat-rename.md)
+- [ ] Another task [+](t0003_another-task.md)
+- [ ] Not yet a task [+](t0004_not-yet-a-task.md)
+- [ ] Not yet a task 2 [+](t0005_not-yet-a-task-2.md)
+- [ ] Add another task [+](t0006_add-another-task.md)

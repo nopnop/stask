@@ -1,6 +1,6 @@
 {
   "name": "stask",
-  "description": "S(imple|art|illy) task manager in plain markdown files",
+  "description": "S(imple|mart|illy) task manager in plain markdown files",
   "version": "0.0.0",
   "author": "Jean Ponchon <jean.ponchon@novadiscovery.com>",
   "repository": {

@@ -11,22 +11,23 @@ const ndjson = require('ndjson')
 
 // List of available actions
 const actions = {
-  parse: require('../lib/actions/parse'),
-  read: require('../lib/actions/read'),
-  format: require('../lib/actions/format'),
-  update: require('../lib/actions/update'),
   add: require('../lib/actions/add'),
+  update: require('../lib/actions/update'),
+  read: require('../lib/actions/read'),
+  parse: require('../lib/actions/parse'),
+  format: require('../lib/actions/format'),
   list: require('../lib/actions/list')
 }
 
 // Read command line options
 const argv = minimist(process.argv.slice(2), {
   boolean: true,
-  string: ['cwd', 'filter', 'prefix'],
+  string: ['cwd', 'filter', 'prefix', 'dir'],
   alias: {
     f: 'filter',
     h: 'help',
     w: 'watch',
+    d: 'dir',
     V: 'version'
   },
   default: {
@@ -51,7 +52,10 @@ function printHelp () {
     -h, --help       Output command usages
     -V, --version    Output the version
     -f, --filter     Read filter (mongo-like expression)
+    -w, --watch      Watch for change and continuously update (update task)
+    -d, --dir        Create new task in this dir (default: cwd)
     --prefix         For task id prefix (used by add)
+
   Actions:
 ${helpActions.join('\n')}
 

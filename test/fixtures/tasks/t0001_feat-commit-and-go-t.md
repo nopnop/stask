@@ -2,9 +2,9 @@
 done: true
 owner: JP
 tags:
-  - nicest
+  - bug
 before: 2017-01-23T00:00:00.000Z
-cost: 1
+cost: 4
 ```
 
 ### feat: Commit and go to sleep
